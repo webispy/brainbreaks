@@ -128,8 +128,14 @@ static void tc_twoSum()
 {
 	int data1[] = {2,7,11,15};
 	int want1[] = {0,1};
-	int data2[] = {-1,-2,-3,-4,-5};
+	int data2[] = {1,2,3,4,5};
 	int want2[] = {2,4};
+	int data3[] = {3,3};
+	int want3[] = {0,1};
+	int data4[] = {0,4,3,0};
+	int want4[] = {0,3};
+	int data5[] = {-3,4,3,90};
+	int want5[] = {0,2};
 	int *out;
 
 	g_assert(twoSum(NULL, 1, 0) == NULL);
@@ -143,9 +149,24 @@ static void tc_twoSum()
 	g_assert_cmpmem(out, sizeof(int) * 2, want1, sizeof(want1));
 	free(out);
 
-	out = twoSum(data2, sizeof(data2) / sizeof(int), -8);
+	out = twoSum(data2, sizeof(data2) / sizeof(int), 8);
 	g_assert(out != NULL);
 	g_assert_cmpmem(out, sizeof(int) * 2, want2, sizeof(want2));
+	free(out);
+
+	out = twoSum(data3, sizeof(data3) / sizeof(int), 6);
+	g_assert(out != NULL);
+	g_assert_cmpmem(out, sizeof(int) * 2, want3, sizeof(want3));
+	free(out);
+
+	out = twoSum(data4, sizeof(data4) / sizeof(int), 0);
+	g_assert(out != NULL);
+	g_assert_cmpmem(out, sizeof(int) * 2, want4, sizeof(want4));
+	free(out);
+
+	out = twoSum(data5, sizeof(data5) / sizeof(int), 0);
+	g_assert(out != NULL);
+	g_assert_cmpmem(out, sizeof(int) * 2, want5, sizeof(want5));
 	free(out);
 }
 

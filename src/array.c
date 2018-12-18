@@ -3,6 +3,17 @@
 #include <string.h>
 #include "array.h"
 
+#ifndef EXPORT_API
+#define EXPORT_API
+#endif
+
+#define HASHSIZE 8192
+#define GOODPRIME 2711 /* Near prime number of 8192/3 */
+#define MINUSLIMIT 99 /* Assumed -99 to positive number 0 */
+#define HASHFUNC(k) (((k + MINUSLIMIT) * GOODPRIME) & (HASHSIZE - 1))
+
+static int _hash[HASHSIZE];
+
 EXPORT_API int reverse(int *nums, int numsSize)
 {
 	int i = 0;
@@ -22,7 +33,7 @@ EXPORT_API int reverse(int *nums, int numsSize)
 }
 
 /**
- * #189
+ * #646
  */
 EXPORT_API int rotateRight(int *nums, int numsSize, int k)
 {
@@ -38,7 +49,7 @@ EXPORT_API int rotateRight(int *nums, int numsSize, int k)
 }
 
 /**
- * #26
+ * #727
  */
 EXPORT_API int removeDuplicates(int *nums, int numsSize)
 {
@@ -63,7 +74,7 @@ EXPORT_API int removeDuplicates(int *nums, int numsSize)
 }
 
 /**
- * #136
+ * #549
  */
 EXPORT_API int singleNumber(int *nums, int numsSize)
 {
@@ -80,7 +91,7 @@ EXPORT_API int singleNumber(int *nums, int numsSize)
 }
 
 /**
- * #66
+ * #559
  */
 EXPORT_API int *plusOne(int *digits, int digitsSize, int *returnSize)
 {
@@ -112,26 +123,39 @@ EXPORT_API int *plusOne(int *digits, int digitsSize, int *returnSize)
 	return out;
 }
 
+/**
+ * #546
+ */
 EXPORT_API int *twoSum(int *nums, int numsSize, int target)
 {
 	int *out;
 	int i, j;
+	int need;
 
 	if (!nums || numsSize <= 0)
 		return NULL;
+
+	memset(_hash, 0, sizeof(_hash));
 
 	out = malloc(sizeof(int) * 2);
 	if (!out)
 		return NULL;
 
-	for (i = 0; i < numsSize - 1; i++) {
-		for (j = i + 1; j < numsSize; j++) {
-			if (*(nums + i) + *(nums + j) == target) {
+	for (i = 0; i < numsSize; i++) {
+		need = target - *(nums + i);
+		j = _hash[HASHFUNC(need)] - 1;
+		if (j >= 0) {
+			if (i < j) {
 				*out = i;
 				*(out + 1) = j;
-				return out;
+			} else {
+				*out = j;
+				*(out + 1) = i;
 			}
+			return out;
 		}
+
+		_hash[HASHFUNC(*(nums + i))] = i + 1;
 	}
 
 	free(out);
