@@ -7,12 +7,20 @@
 #define EXPORT_API
 #endif
 
+/**
+ * Simple hash
+ */
 #define HASHSIZE 8192
 #define GOODPRIME 2711 /* Near prime number of 8192/3 */
 #define MINUSLIMIT 99 /* Assumed -99 to positive number 0 */
 #define HASHFUNC(k) (((k + MINUSLIMIT) * GOODPRIME) & (HASHSIZE - 1))
 
 static int _hash[HASHSIZE];
+
+/**
+ * pre-calculated table for 2^N
+ */
+static int pow2[] = {1,2,4,8,16,32,64,128};
 
 EXPORT_API int reverse(int *nums, int numsSize)
 {
@@ -191,4 +199,50 @@ EXPORT_API int maxProfit(int *prices, int pricesSize)
 		profit += prices[i] - stash;
 
 	return profit;
+}
+
+/**
+ * #578
+ */
+EXPORT_API bool containsDuplicate(int *nums, int numsSize)
+{
+	int i;
+	char *buf;
+	int max = 0, min = 9999999;
+	int digit;
+	bool result = false;
+	int v;
+
+	if (!nums || numsSize <= 0)
+		return false;
+
+	for (i = 0; i < numsSize; i++) {
+		if (nums[i] > max)
+			max = nums[i];
+		if (nums[i] < min)
+			min = nums[i];
+	}
+
+	if (min > 0)
+		min = 0;
+	else {
+		min = min * -1;
+		max += min;
+	}
+
+	buf = calloc(max / 8 + 1, sizeof(char));
+
+	for (i = 0; i < numsSize; i++) {
+		v = nums[i] + min;
+		digit = v % 8;
+		if (buf[v / 8] & pow2[digit]) {
+			result = true;
+			break;
+		}
+
+		buf[v / 8] |= pow2[digit];
+	}
+
+	free(buf);
+	return result;
 }

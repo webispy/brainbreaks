@@ -183,6 +183,25 @@ static void tc_maxProfit()
 	g_assert(maxProfit(data3, sizeof(data3) / sizeof(int)) == 0);
 }
 
+static void tc_containsDuplicate()
+{
+	int data1[] = {1,2,3,1};
+	int data2[] = {1,2,3,4};
+	int data3[] = {1,1,1,3,3,4,3,2,4,2};
+	int data4[] = {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17};
+	int data5[] = {237384,348185,338816,825359,461215,315112,170091};
+	int data6[] = {1,5,-2,-4,0};
+
+	g_assert(containsDuplicate(NULL, 1) == false);
+	g_assert(containsDuplicate(data1, 0) == false);
+	g_assert(containsDuplicate(data1, sizeof(data1) / sizeof(int)) == true);
+	g_assert(containsDuplicate(data2, sizeof(data2) / sizeof(int)) == false);
+	g_assert(containsDuplicate(data3, sizeof(data3) / sizeof(int)) == true);
+	g_assert(containsDuplicate(data4, sizeof(data4) / sizeof(int)) == false);
+	g_assert(containsDuplicate(data5, sizeof(data5) / sizeof(int)) == false);
+	g_assert(containsDuplicate(data6, sizeof(data6) / sizeof(int)) == false);
+}
+
 int main(int argc, char *argv[])
 {
 	g_test_init(&argc, &argv, NULL);
@@ -194,6 +213,7 @@ int main(int argc, char *argv[])
 	g_test_add_func("/array/plusOne", tc_plusOne);
 	g_test_add_func("/array/twoSum", tc_twoSum);
 	g_test_add_func("/array/maxProfit", tc_maxProfit);
+	g_test_add_func("/array/containsDuplicate", tc_containsDuplicate);
 
 	return g_test_run();
 }
