@@ -7,5 +7,6 @@ int removeDuplicates(int *nums, int numsSize);
 int singleNumber(int *nums, int numsSize);
 int *plusOne(int *digits, int digitsSize, int *returnSize);
 int *twoSum(int *nums, int numsSize, int target);
+int maxProfit(int *prices, int pricesSize);
 
 #endif

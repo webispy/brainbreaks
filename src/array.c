@@ -161,3 +161,34 @@ EXPORT_API int *twoSum(int *nums, int numsSize, int target)
 	free(out);
 	return NULL;
 }
+
+/**
+ * #564
+ */
+EXPORT_API int maxProfit(int *prices, int pricesSize)
+{
+	int profit = 0;
+	int i;
+	int stash = -1;
+
+	if (!prices || pricesSize <= 0)
+		return 0;
+
+	for (i = 0; i < pricesSize - 1; i++) {
+		if (stash == -1) {
+			if (prices[i] > prices[i + 1])
+				continue;
+			stash = prices[i];
+		} else {
+			if (prices[i] < prices[i + 1])
+				continue;
+			profit += prices[i] - stash;
+			stash = -1;
+		}
+	}
+
+	if (stash != -1)
+		profit += prices[i] - stash;
+
+	return profit;
+}

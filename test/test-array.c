@@ -170,6 +170,19 @@ static void tc_twoSum()
 	free(out);
 }
 
+static void tc_maxProfit()
+{
+	int data1[] = {7,1,5,3,6,4};
+	int data2[] = {1,2,3,4,5};
+	int data3[] = {7,6,4,3,1};
+
+	g_assert(maxProfit(NULL, 1) == 0);
+	g_assert(maxProfit(data1, 0) == 0);
+	g_assert(maxProfit(data1, sizeof(data1) / sizeof(int)) == 7);
+	g_assert(maxProfit(data2, sizeof(data2) / sizeof(int)) == 4);
+	g_assert(maxProfit(data3, sizeof(data3) / sizeof(int)) == 0);
+}
+
 int main(int argc, char *argv[])
 {
 	g_test_init(&argc, &argv, NULL);
@@ -180,6 +193,7 @@ int main(int argc, char *argv[])
 	g_test_add_func("/array/singleNumber", tc_singleNumber);
 	g_test_add_func("/array/plusOne", tc_plusOne);
 	g_test_add_func("/array/twoSum", tc_twoSum);
+	g_test_add_func("/array/maxProfit", tc_maxProfit);
 
 	return g_test_run();
 }
