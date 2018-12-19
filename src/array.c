@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "array.h"
+#include "util.h"
 
 #ifndef EXPORT_API
 #define EXPORT_API

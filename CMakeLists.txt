@@ -36,7 +36,8 @@ INCLUDE_DIRECTORIES(
 	${CMAKE_SOURCE_DIR}/src)
 
 SET(SRCS
-	src/array.c)
+	src/array.c
+	src/util.c)
 
 ADD_LIBRARY(brainbreaks SHARED ${SRCS})
 TARGET_LINK_LIBRARIES(brainbreaks PUBLIC ${pkgs_LDFLAGS})
