@@ -247,3 +247,38 @@ EXPORT_API bool containsDuplicate(int *nums, int numsSize)
 	free(buf);
 	return result;
 }
+
+/**
+ * #674
+ */
+EXPORT_API int *intersect(int *nums1, int nums1Size, int *nums2, int nums2Size,
+	int *returnSize)
+{
+	int *result = NULL;
+	int i;
+	int maxcnt = 0;
+
+	if (!nums1 || nums1Size <= 0 || !nums2 || nums2Size <= 0 || !returnSize)
+		return NULL;
+
+	if (nums1Size > nums2Size)
+		result = calloc(nums1Size, sizeof(int));
+	else
+		result = calloc(nums2Size, sizeof(int));
+
+	memset(_hash, 0, sizeof(_hash));
+
+	for (i = 0; i < nums1Size; i++)
+		_hash[HASHFUNC(nums1[i])]++;
+
+	for (i = 0; i < nums2Size; i++) {
+		if (_hash[HASHFUNC(nums2[i])]) {
+			_hash[HASHFUNC(nums2[i])]--;
+			result[maxcnt++] = nums2[i];
+		}
+	}
+
+	*returnSize = maxcnt;
+
+	return result;
+}

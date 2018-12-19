@@ -205,6 +205,60 @@ static void tc_containsDuplicate()
 	g_assert(containsDuplicate(data6, COUNT(data6)) == false);
 }
 
+static void tc_intersect()
+{
+	int data1_1[] = {1,2,2,1};
+	int data1_2[] = {2,2};
+	int want1[] = {2,2};
+	int data2_1[] = {4,9,5};
+	int data2_2[] = {9,4,9,8,4};
+	int want2[] = {9,4};
+	int data3_1[] = {1,2};
+	int data3_2[] = {2,1};
+	int want3[] = {2,1};
+	int data4_1[] = {9,1};
+	int data4_2[] = {7,8,3,9,0,0,9,1,5};
+	int want4[] = {9,1};
+
+	int *out;
+	int outsize;
+
+	g_assert(intersect(NULL, 1, NULL, 2, NULL) == NULL);
+	g_assert(intersect(data1_1, 0, data1_2, 0, NULL) == NULL);
+
+	outsize = 0;
+	out = intersect(data1_1, COUNT(data1_1), data1_2,
+			COUNT(data1_2), &outsize);
+	g_assert(outsize == COUNT(want1));
+	g_assert(out != NULL);
+	g_assert_cmpmem(out, sizeof(int) * outsize, want1, sizeof(want1));
+	free(out);
+
+	outsize = 0;
+	out = intersect(data2_1, COUNT(data2_1), data2_2,
+			COUNT(data2_2), &outsize);
+	g_assert(outsize == COUNT(want2));
+	g_assert(out != NULL);
+	g_assert_cmpmem(out, sizeof(int) * outsize, want2, sizeof(want2));
+	free(out);
+
+	outsize = 0;
+	out = intersect(data3_1, COUNT(data3_1), data3_2,
+			COUNT(data3_2), &outsize);
+	g_assert(outsize == COUNT(want3));
+	g_assert(out != NULL);
+	g_assert_cmpmem(out, sizeof(int) * outsize, want3, sizeof(want3));
+	free(out);
+
+	outsize = 0;
+	out = intersect(data4_1, COUNT(data4_1), data4_2,
+			COUNT(data4_2), &outsize);
+	g_assert(outsize == COUNT(want4));
+	g_assert(out != NULL);
+	g_assert_cmpmem(out, sizeof(int) * outsize, want4, sizeof(want4));
+	free(out);
+}
+
 int main(int argc, char *argv[])
 {
 	g_test_init(&argc, &argv, NULL);
@@ -217,6 +271,7 @@ int main(int argc, char *argv[])
 	g_test_add_func("/array/twoSum", tc_twoSum);
 	g_test_add_func("/array/maxProfit", tc_maxProfit);
 	g_test_add_func("/array/containsDuplicate", tc_containsDuplicate);
+	g_test_add_func("/array/intersect", tc_intersect);
 
 	return g_test_run();
 }
