@@ -259,6 +259,20 @@ static void tc_intersect()
 	free(out);
 }
 
+static void tc_moveZeroes()
+{
+	int data1[] = {0,1,0,3,12};
+	int want1[] = {1,3,12,0,0};
+	int data2[] = {0,0,1};
+	int want2[] = {1,0,0};
+
+	moveZeroes(data1, COUNT(data1));
+	g_assert_cmpmem(data1, sizeof(data1), want1, sizeof(want1));
+
+	moveZeroes(data2, COUNT(data2));
+	g_assert_cmpmem(data2, sizeof(data2), want2, sizeof(want2));
+}
+
 int main(int argc, char *argv[])
 {
 	g_test_init(&argc, &argv, NULL);
@@ -272,6 +286,7 @@ int main(int argc, char *argv[])
 	g_test_add_func("/array/maxProfit", tc_maxProfit);
 	g_test_add_func("/array/containsDuplicate", tc_containsDuplicate);
 	g_test_add_func("/array/intersect", tc_intersect);
+	g_test_add_func("/array/moveZeroes", tc_moveZeroes);
 
 	return g_test_run();
 }

@@ -12,5 +12,6 @@ int *twoSum(int *nums, int numsSize, int target);
 int maxProfit(int *prices, int pricesSize);
 bool containsDuplicate(int *nums, int numsSize);
 int *intersect(int *nums1, int nums1Size, int *nums2, int nums2Size, int *returnSize);
+void moveZeroes(int *nums, int numsSize);
 
 #endif

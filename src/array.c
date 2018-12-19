@@ -282,3 +282,23 @@ EXPORT_API int *intersect(int *nums1, int nums1Size, int *nums2, int nums2Size,
 
 	return result;
 }
+
+/**
+ * #567
+ */
+EXPORT_API void moveZeroes(int *nums, int numsSize)
+{
+	int i;
+	int pos = 0;
+
+	for (i = 0; i < numsSize; i++) {
+		if (nums[i] == 0)
+			continue;
+
+		nums[pos] = nums[i];
+		pos++;
+	}
+
+	for (i = pos; i < numsSize; i++)
+		nums[i] = 0;
+}
