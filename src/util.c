@@ -3,7 +3,11 @@
 
 #include "util.h"
 
-void dump_array(const char *prefix, int *array, int len)
+#ifndef EXPORT_API
+#define EXPORT_API
+#endif
+
+EXPORT_API void dump_array(const char *prefix, int *array, int len)
 {
 	int i;
 
@@ -19,7 +23,7 @@ void dump_array(const char *prefix, int *array, int len)
 	printf("\n");
 }
 
-void dump_array2d(const char *prefix, int **array, int row, int col)
+EXPORT_API void dump_array2d(const char *prefix, int **array, int row, int col)
 {
 	int i, j;
 	int *ptr = (int *)array;

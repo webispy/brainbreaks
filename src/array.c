@@ -4,10 +4,6 @@
 #include "array.h"
 #include "util.h"
 
-#ifndef EXPORT_API
-#define EXPORT_API
-#endif
-
 /**
  * Simple hash
  */
@@ -23,7 +19,7 @@ static int _hash[HASHSIZE];
  */
 static int pow2[] = {1,2,4,8,16,32,64,128};
 
-EXPORT_API int reverse(int *nums, int numsSize)
+int reverse(int *nums, int numsSize)
 {
 	int i = 0;
 	int j = numsSize - 1;
@@ -44,7 +40,7 @@ EXPORT_API int reverse(int *nums, int numsSize)
 /**
  * #646
  */
-EXPORT_API int rotateRight(int *nums, int numsSize, int k)
+int rotateRight(int *nums, int numsSize, int k)
 {
 	if (!nums || numsSize <= 0 || k < 0)
 		return -1;
@@ -60,7 +56,7 @@ EXPORT_API int rotateRight(int *nums, int numsSize, int k)
 /**
  * #727
  */
-EXPORT_API int removeDuplicates(int *nums, int numsSize)
+int removeDuplicates(int *nums, int numsSize)
 {
 	int pos;
 	int i;
@@ -85,7 +81,7 @@ EXPORT_API int removeDuplicates(int *nums, int numsSize)
 /**
  * #549
  */
-EXPORT_API int singleNumber(int *nums, int numsSize)
+int singleNumber(int *nums, int numsSize)
 {
 	int i;
 	int result = 0;
@@ -102,7 +98,7 @@ EXPORT_API int singleNumber(int *nums, int numsSize)
 /**
  * #559
  */
-EXPORT_API int *plusOne(int *digits, int digitsSize, int *returnSize)
+int *plusOne(int *digits, int digitsSize, int *returnSize)
 {
 	int *out;
 	int i;
@@ -135,7 +131,7 @@ EXPORT_API int *plusOne(int *digits, int digitsSize, int *returnSize)
 /**
  * #546
  */
-EXPORT_API int *twoSum(int *nums, int numsSize, int target)
+int *twoSum(int *nums, int numsSize, int target)
 {
 	int *out;
 	int i, j;
@@ -174,7 +170,7 @@ EXPORT_API int *twoSum(int *nums, int numsSize, int target)
 /**
  * #564
  */
-EXPORT_API int maxProfit(int *prices, int pricesSize)
+int maxProfit(int *prices, int pricesSize)
 {
 	int profit = 0;
 	int i;
@@ -205,7 +201,7 @@ EXPORT_API int maxProfit(int *prices, int pricesSize)
 /**
  * #578
  */
-EXPORT_API bool containsDuplicate(int *nums, int numsSize)
+bool containsDuplicate(int *nums, int numsSize)
 {
 	int i;
 	char *buf;
@@ -251,7 +247,7 @@ EXPORT_API bool containsDuplicate(int *nums, int numsSize)
 /**
  * #674
  */
-EXPORT_API int *intersect(int *nums1, int nums1Size, int *nums2, int nums2Size,
+int *intersect(int *nums1, int nums1Size, int *nums2, int nums2Size,
 	int *returnSize)
 {
 	int *result = NULL;
@@ -286,7 +282,7 @@ EXPORT_API int *intersect(int *nums1, int nums1Size, int *nums2, int nums2Size,
 /**
  * #567
  */
-EXPORT_API void moveZeroes(int *nums, int numsSize)
+void moveZeroes(int *nums, int numsSize)
 {
 	int i;
 	int pos = 0;
@@ -306,7 +302,7 @@ EXPORT_API void moveZeroes(int *nums, int numsSize)
 /**
  * #769
  */
-EXPORT_API bool isValidSudoku(char **board, int boardRowSize, int boardColSize)
+bool isValidSudoku(char **board, int boardRowSize, int boardColSize)
 {
 	int rowmap[9][10];
 	int colmap[9][10];
@@ -351,7 +347,7 @@ EXPORT_API bool isValidSudoku(char **board, int boardRowSize, int boardColSize)
 /**
  * #770
  */
-EXPORT_API void rotate90(int **matrix, int matrixRowSize, int *matrixColSizes)
+void rotate90(int **matrix, int matrixRowSize, int *matrixColSizes)
 {
 	int half;
 	int tmp;

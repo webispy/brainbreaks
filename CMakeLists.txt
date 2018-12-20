@@ -35,25 +35,22 @@ INCLUDE_DIRECTORIES(
 	${CMAKE_SOURCE_DIR}
 	${CMAKE_SOURCE_DIR}/src)
 
-SET(SRCS
-	src/array.c
-	src/strings.c
-	src/util.c)
-
-ADD_LIBRARY(brainbreaks SHARED ${SRCS})
+ADD_LIBRARY(brainbreaks SHARED src/util.c)
 TARGET_LINK_LIBRARIES(brainbreaks PUBLIC ${pkgs_LDFLAGS})
 SET_TARGET_PROPERTIES(brainbreaks
 	PROPERTIES VERSION ${VERSION} SOVERSION ${VERSION_MAJOR} OUTPUT_NAME brainbreaks)
 INSTALL(TARGETS brainbreaks LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR})
 
+SET(ITEMS
+	array
+	strings)
+
 # Tests
 ENABLE_TESTING()
-FILE(GLOB tests RELATIVE "${CMAKE_SOURCE_DIR}/test" "${CMAKE_SOURCE_DIR}/test/*.c")
-FOREACH(test IN LISTS tests)
-	GET_FILENAME_COMPONENT(test_name ${test} NAME_WE)
-	ADD_EXECUTABLE(${test_name} test/${test})
-	TARGET_LINK_LIBRARIES(${test_name} PUBLIC brainbreaks)
-	ADD_DEPENDENCIES(${test_name} brainbreaks)
-	ADD_TEST(${test_name} ${test_name})
+FOREACH(item ${ITEMS})
+	ADD_EXECUTABLE(test-${item} test/test-${item}.c src/${item}.c)
+	TARGET_LINK_LIBRARIES(test-${item} PUBLIC brainbreaks)
+	ADD_DEPENDENCIES(test-${item} brainbreaks)
+	ADD_TEST(test-${item} test-${item})
 ENDFOREACH()
 

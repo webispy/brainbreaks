@@ -4,6 +4,3 @@
 #include "strings.h"
 #include "util.h"
 
-#ifndef EXPORT_API
-#define EXPORT_API
-#endif
