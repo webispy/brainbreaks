@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <glib.h>
+
 #include "array.h"
 
 #define COUNT(array) (sizeof(array) / sizeof(array[0]))
@@ -293,6 +294,37 @@ static void tc_isValidSudoku()
 	g_assert(isValidSudoku(data1, 9, 9) == false);
 }
 
+static void tc_rotate90()
+{
+	int data1[3][3] = {
+		{1,2,3},
+		{4,5,6},
+		{7,8,9} };
+	int want1[3][3] = {
+		{7,4,1},
+		{8,5,2},
+		{9,6,3} };
+	int data2[4][4] = {
+		{ 5, 1, 9,11},
+		{ 2, 4, 8,10},
+		{13, 3, 6, 7},
+		{15,14,12,16} };
+	int want2[4][4] = {
+		{15,13, 2, 5},
+		{14, 3, 4, 1},
+		{12, 6, 8, 9},
+		{16, 7,10,11} };
+	int col;
+
+	col = 3;
+	rotate90((int **)data1, 3, &col);
+	g_assert_cmpmem(data1, sizeof(data1), want1, sizeof(want1));
+
+	col = 4;
+	rotate90((int **)data2, 4, &col);
+	g_assert_cmpmem(data2, sizeof(data2), want2, sizeof(want2));
+}
+
 int main(int argc, char *argv[])
 {
 	g_test_init(&argc, &argv, NULL);
@@ -308,6 +340,7 @@ int main(int argc, char *argv[])
 	g_test_add_func("/array/intersect", tc_intersect);
 	g_test_add_func("/array/moveZeroes", tc_moveZeroes);
 	g_test_add_func("/array/isValidSudoku", tc_isValidSudoku);
+	g_test_add_func("/array/rotate90", tc_rotate90);
 
 	return g_test_run();
 }

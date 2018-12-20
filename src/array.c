@@ -347,3 +347,39 @@ EXPORT_API bool isValidSudoku(char **board, int boardRowSize, int boardColSize)
 
 	return true;
 }
+
+/**
+ * #770
+ */
+EXPORT_API void rotate90(int **matrix, int matrixRowSize, int *matrixColSizes)
+{
+	int half;
+	int tmp;
+	int i = 0, j, k, t;
+
+#if LEETCODE_JUDGE
+#define M(y,x) matrix[y][x]
+#else
+#define M(y,x) *(ptr + ((y) * matrixRowSize) + (x))
+	int *ptr = (int *)matrix;
+#endif
+
+#define MOVE(from_y,from_x,to_y,to_x) M((to_y),(to_x)) = M((from_y),(from_x));
+
+	if (!matrix || matrixRowSize <= 0)
+		return;
+
+	half = matrixRowSize / 2;
+	j = matrixRowSize - 1;
+
+	for (; i < half; i++, j--) {
+		t = matrixRowSize - 1 - i;
+		for (k = i; k < matrixRowSize - 1 - i; k++, t--) {
+			tmp = M(i, k);
+			MOVE(t,i, i,k);
+			MOVE(j,t, t,i);
+			MOVE(k,j, j,t);
+			M(k, j) = tmp;
+		}
+	}
+}
