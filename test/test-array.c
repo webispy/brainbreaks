@@ -273,6 +273,26 @@ static void tc_moveZeroes()
 	g_assert_cmpmem(data2, sizeof(data2), want2, sizeof(want2));
 }
 
+static void tc_isValidSudoku()
+{
+	char *data1[] = {
+		"53..7....",
+		"6..195...",
+		".98....6.",
+		"8...6...3",
+		"4..8.3..1",
+		"7...2...6",
+		".6....28.",
+		"...419..5",
+		"....8..79" };
+
+	g_assert(isValidSudoku(NULL, 0, 0) == false);
+	g_assert(isValidSudoku(data1, 9, 9) == true);
+
+	data1[0] = "83..7....";
+	g_assert(isValidSudoku(data1, 9, 9) == false);
+}
+
 int main(int argc, char *argv[])
 {
 	g_test_init(&argc, &argv, NULL);
@@ -287,6 +307,7 @@ int main(int argc, char *argv[])
 	g_test_add_func("/array/containsDuplicate", tc_containsDuplicate);
 	g_test_add_func("/array/intersect", tc_intersect);
 	g_test_add_func("/array/moveZeroes", tc_moveZeroes);
+	g_test_add_func("/array/isValidSudoku", tc_isValidSudoku);
 
 	return g_test_run();
 }

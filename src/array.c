@@ -302,3 +302,48 @@ EXPORT_API void moveZeroes(int *nums, int numsSize)
 	for (i = pos; i < numsSize; i++)
 		nums[i] = 0;
 }
+
+/**
+ * #769
+ */
+EXPORT_API bool isValidSudoku(char **board, int boardRowSize, int boardColSize)
+{
+	int rowmap[9][10];
+	int colmap[9][10];
+	int submap[9][10];
+	int i, j;
+	int sx, sy;
+	int val;
+
+	if (!board || boardRowSize <= 0 || boardColSize <= 0)
+		return false;
+
+	memset(rowmap, 0, sizeof(rowmap));
+	memset(colmap, 0, sizeof(colmap));
+	memset(submap, 0, sizeof(submap));
+
+	for (i = 0; i < boardRowSize; i++) {
+		sy = (i / 3) * 3;
+		for (j = 0; j < boardColSize; j++) {
+			if (board[i][j] == '.')
+				continue;
+
+			val = board[i][j] - '0';
+			sx = j / 3;
+
+			if (submap[sy + sx][val])
+				return false;
+			submap[sy + sx][val] = 1;
+
+			if (rowmap[i][val])
+				return false;
+			rowmap[i][val] = 1;
+
+			if (colmap[j][val])
+				return false;
+			colmap[j][val] = 1;
+		}
+	}
+
+	return true;
+}
