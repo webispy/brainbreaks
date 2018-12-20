@@ -37,6 +37,7 @@ INCLUDE_DIRECTORIES(
 
 SET(SRCS
 	src/array.c
+	src/strings.c
 	src/util.c)
 
 ADD_LIBRARY(brainbreaks SHARED ${SRCS})
