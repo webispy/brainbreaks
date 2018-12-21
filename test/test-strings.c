@@ -18,11 +18,23 @@ static void tc_reverseString()
     g_assert_cmpstr(reverseString(data), ==, want2);
 }
 
+static void tc_reverse()
+{
+	g_assert(reverse(0) == 0);
+	g_assert(reverse(123) == 321);
+	g_assert(reverse(-123) == -321);
+	g_assert(reverse(120) == 21);
+	g_assert(reverse(2147483647) == 0);
+	g_assert(reverse(1534236469) == 0);
+	g_assert(reverse(2147483641) == 1463847412);
+}
+
 int main(int argc, char *argv[])
 {
 	g_test_init(&argc, &argv, NULL);
 
 	g_test_add_func("/strings/reverseString", tc_reverseString);
+	g_test_add_func("/strings/reverse", tc_reverse);
 
 	return g_test_run();
 }

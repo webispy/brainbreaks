@@ -4,5 +4,6 @@
 #include <stdbool.h>
 
 char *reverseString(char* s);
+int reverse(int x);
 
 #endif
