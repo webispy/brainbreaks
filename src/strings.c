@@ -6,27 +6,27 @@
 
 char *reverseString(char* s)
 {
-    int i = 0, len = 0;
-    char buf;
+	int i = 0, len = 0;
+	char buf;
 
-    if (!s)
-        return NULL;
+	if (!s)
+		return NULL;
 
-    if (s[0] == '\0')
-        return s;
+	if (s[0] == '\0')
+		return s;
 
-    while(s[len] != '\0')
-        len++;
-    len--;
+	while(s[len] != '\0')
+		len++;
+	len--;
 
-    while(i < len) {
-        buf = s[len];
-        s[len] = s[i];
-        s[i] = buf;
+	while(i < len) {
+		buf = s[len];
+		s[len] = s[i];
+		s[i] = buf;
 
-        len--;
-        i++;
-    }
+		len--;
+		i++;
+	}
 
-    return s;
+	return s;
 }
