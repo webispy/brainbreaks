@@ -37,7 +37,7 @@ char *reverseString(char* s)
 /**
  * #880
  */
-int reverse(int x)
+int reverseDigits(int x)
 {
 	unsigned int v;
 	unsigned int result = 0;

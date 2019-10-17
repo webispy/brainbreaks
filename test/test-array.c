@@ -1,4 +1,6 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #include <glib.h>
 
 #include "array.h"
@@ -12,11 +14,11 @@ static void tc_reverse()
 	int data2[] = {1,2,3};
 	int want2[] = {3,2,1};
 
-	g_assert(reverse(NULL, 1) == -1);
-	g_assert(reverse(data1, 0) == -1);
-	g_assert(reverse(data1, COUNT(data1)) == 0);
+	g_assert(reverseList(NULL, 1) == -1);
+	g_assert(reverseList(data1, 0) == -1);
+	g_assert(reverseList(data1, COUNT(data1)) == 0);
 	g_assert_cmpmem(data1, sizeof(data1), want1, sizeof(want1));
-	g_assert(reverse(data2, COUNT(data2)) == 0);
+	g_assert(reverseList(data2, COUNT(data2)) == 0);
 	g_assert_cmpmem(data2, sizeof(data2), want2, sizeof(want2));
 }
 

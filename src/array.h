@@ -3,7 +3,7 @@
 
 #include <stdbool.h>
 
-int reverse(int *nums, int numsSize);
+int reverseList(int *nums, int numsSize);
 int rotateRight(int *nums, int numsSize, int k);
 int removeDuplicates(int *nums, int numsSize);
 int singleNumber(int *nums, int numsSize);

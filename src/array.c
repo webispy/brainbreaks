@@ -19,7 +19,7 @@ static int _hash[HASHSIZE];
  */
 static int pow2[] = {1,2,4,8,16,32,64,128};
 
-int reverse(int *nums, int numsSize)
+int reverseList(int *nums, int numsSize)
 {
 	int i = 0;
 	int j = numsSize - 1;
@@ -46,9 +46,9 @@ int rotateRight(int *nums, int numsSize, int k)
 		return -1;
 
 	k = k % numsSize;
-	reverse(nums, numsSize);
-	reverse(nums, k);
-	reverse(nums + k, numsSize - k);
+	reverseList(nums, numsSize);
+	reverseList(nums, k);
+	reverseList(nums + k, numsSize - k);
 
 	return 0;
 }

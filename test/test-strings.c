@@ -1,4 +1,6 @@
 #include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
 #include <glib.h>
 
 #include "strings.h"
@@ -20,13 +22,13 @@ static void tc_reverseString()
 
 static void tc_reverse()
 {
-	g_assert(reverse(0) == 0);
-	g_assert(reverse(123) == 321);
-	g_assert(reverse(-123) == -321);
-	g_assert(reverse(120) == 21);
-	g_assert(reverse(2147483647) == 0);
-	g_assert(reverse(1534236469) == 0);
-	g_assert(reverse(2147483641) == 1463847412);
+	g_assert(reverseDigits(0) == 0);
+	g_assert(reverseDigits(123) == 321);
+	g_assert(reverseDigits(-123) == -321);
+	g_assert(reverseDigits(120) == 21);
+	g_assert(reverseDigits(2147483647) == 0);
+	g_assert(reverseDigits(1534236469) == 0);
+	g_assert(reverseDigits(2147483641) == 1463847412);
 }
 
 int main(int argc, char *argv[])
